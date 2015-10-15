@@ -3,5 +3,7 @@ available/*
 enabled/*
 tmp/*
 work/*
+*.cookie
+config
 !.gitkeep
 !*.template
