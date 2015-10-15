@@ -1,0 +1,44 @@
+function MakeBody {
+	AttachementsList=`ls ${tempdir}`
+### HEADERS INSERT
+##	echo "From: somebody@somedomain.com"
+	echo "To: ${SendTo}"
+	echo "MIME-Version: 1.0"
+	echo "Subject: Daily report mongo"
+	echo "Content-Type: multipart/mixed; boundary=\"FILEBOUNDARY\""
+	echo
+	echo "--FILEBOUNDARY"
+	echo "Content-Type: multipart/alternative; boundary=\"MSGBOUNDARY\""
+	echo
+### HEADERS END
+
+### BODY START
+	echo "--MSGBOUNDARY"
+	echo "Content-Type: text/html; charset=iso-8859-1"
+	echo "Content-Disposition: inline"
+	echo "<html><body>"
+	echo "<font face=verdana size=2>Report GraphIds:- </font><br>"
+
+### INSERT IMAGES IN BODY LOOP
+	for image in ${AttachementsList}; do
+		echo "<img src=\"cid:${image}\" /><br>"
+	done;
+	echo "</body></html>"
+### BODY END
+### INSERT IMAGES
+	echo "--MSGBOUNDARY--"
+	for image in ${AttachementsList}; do
+		echo
+		echo "--FILEBOUNDARY"
+		echo "Content-Type: image/jpeg"
+		echo "Content-Disposition: inline; filename=\"${image}\""
+		echo "Content-Transfer-Encoding: base64"
+		echo "Content-Id: <${image}>"
+		echo
+		base64 ${image}
+		echo
+	done
+	echo "--FILEBOUNDARY--"
+
+### DONE HERE :)
+}

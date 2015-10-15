@@ -1,0 +1,7 @@
+available/*
+zabbix.cookie
+!available/*.template
+enabled/*
+tmp/*
+config
+!.gitkeep
