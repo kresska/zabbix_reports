@@ -1,0 +1,19 @@
+### Type of report, can be [ daily | weekly | monthly | custom ] ###
+Type=''
+### Graphs - list of grapids which need to processed separated 
+### by space with width in format graphid:wight:heigth e.g. 
+### 2435:900:150 which mean graphid 2435 with width 900 and 
+### heigth will be user, if width/height are not set, then
+### default value will use.
+Graphs=''
+### email header's here
+From=''
+SendTo=''
+Subject=''
+### Which body template to use, default used if not set
+Body='default'
+### Which time period used to draw a graphs, daily used if not set
+Period=''
+### Cycle - used in custom report to detect wether it is 
+### necessary to work by this formula $((today % $Cycle))
+Cycle=''
