@@ -1,0 +1,7 @@
+mails/*
+available/*
+enabled/*
+tmp/*
+work/*
+!.gitkeep
+!*.template
