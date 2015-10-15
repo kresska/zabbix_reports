@@ -1,0 +1,30 @@
+#!/bin/bash
+function get_cookie {
+catch_input "Enter User Name: " "text" || return 1
+catch_input "Enter password: " "password"|| return 1 
+wget --save-cookies=${cookieFile} -4 --keep-session-cookies -O - \
+-S --post-data="name=${text}&password=${password}&enter=Sign in&autologin=1&request=" \
+ 'http://mon.actionpay.ru/index.php?login=1' 1>/dev/null 2>&1
+
+}
+
+function check_cookie {
+if [ ! -e ${cookieFile} ]; then
+[[ -z "$silent" ]] && echo "no cookie file found :("
+exit 1
+fi
+grep sessionid ${cookieFile} 1>/dev/null 2>&1 
+if [[ "$?" -eq "0" ]]; then
+	[[ -z "$silent" ]] && echo "good cookie, yummy!" 
+		exit 0
+	else
+	[[ -z "$silent" ]] && echo "No session found in cookie file!"
+		exit 2
+fi
+}
+case $1 in
+	check) check_cookie;;
+	get) get_cookie;;
+	delete) rm ${cookieFile};;
+	*) echo "$0 cookie usage: reports cookie [ check | get | delete ]"
+esac

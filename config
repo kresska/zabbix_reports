@@ -4,11 +4,12 @@ export bindir="${basedir}/bin"
 export tempdir="${basedir}/work"
 export templates="${basedir}/mails"
 export cookieFile="${basedir}/zabbix.cookie"
+export PATH="$PATH:${bindir}"
 
 #mail options
 mailbin="$( which sendmail)"
 mailopts="-t"
-SendMail=`${mailbin} ${mailopts}`
+SendMail="${mailbin} ${mailopts}"
 
 ## url of zabbix monitoring
 export ZabbixHost="http://$CHANGEME"
