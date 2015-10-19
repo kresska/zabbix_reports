@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ## change it to location of reports.config
 source /etc/zabbix/reports/config
 function catch_input() {
@@ -43,7 +43,6 @@ function main {
 export silent=1
 cookie check
 case $? in
-	0) echo "all ok";;
 	1) echo "no file, aborting" && exit 1;;
 	2) echo "no cookie in file" && exit 2;;
 esac
@@ -61,16 +60,13 @@ for ReportName in `ls ${basedir}/enabled`; do
 
 ## donload images if they need ##
 
-	for graphid in {$Graphs}; do
+	for graphid in ${Graphs}; do
 	get_graph `echo ${graphid}|awk -F\: '{ print $1" "(length($2)<"2"?"900":$2)" "(length($3)<"2"?"150":$3)}'` 
 	done
 
 ## Processing email ##
-echo start
 source ${templates}/${Body}
-echo "here we are!"
-MakeBody|SendMail
-echo end
+MakeBody|${SendMail}
 	unset -v Type Graphs From SendTo Subject Body Period Cycle
 done
 }
