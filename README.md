@@ -1,2 +1,2 @@
 # zabbix_reports
-Zabbix reporting tool
+Zabbix reporting tool 0.9rc
