@@ -4,7 +4,7 @@ catch_input "Enter User Name: " "text" || return 1
 catch_input "Enter password: " "password"|| return 1 
 wget --save-cookies=${cookieFile} -4 --keep-session-cookies -O - \
 -S --post-data="name=${text}&password=${password}&enter=Sign in&autologin=1&request=" \
- 'http://mon.actionpay.ru/index.php?login=1' 1>/dev/null 2>&1
+ "${ZabbixHost}/index.php?login=1" 1>/dev/null 2>&1
 
 }
 
